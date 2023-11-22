@@ -287,6 +287,9 @@ Al crear este juego, aprendimos:
 - Reproducción de sonidos con Pygame
 - Control de flujo del juego con un bucle principal.
 
+##GITHUB
+https://github.com/matthewcf23/PROYECTO-FINAL-GRUPA-A
+
 ## Bibliografia
 
 https://youtu.be/J473At9fuSk?si=1zXepp7SKMZ8nsxB
