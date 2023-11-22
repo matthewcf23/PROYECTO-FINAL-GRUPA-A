@@ -71,7 +71,7 @@ Al crear este juego, aprendí:
 
 Mi juego se destaca por sus controles y jugabilidad simples, pero desafiantes. El objetivo era maximizar la diversión permitiendo al jugador entrar y jugar inmediatamente. La mecánica principal de esquivar enemigos es fácil de aprender pero difícil de dominar.
 
-https://github.com/matthewcf23/PROYECTO-FINAL-GRUPA-A/assets/151700413/4b02be69-66c9-496a-8281-bbb45d9105fc
+![GRUPO](https://github.com/matthewcf23/PROYECTO-FINAL-GRUPA-A/assets/151700413/4b02be69-66c9-496a-8281-bbb45d9105fc)
 
 ## Requisitos
 
