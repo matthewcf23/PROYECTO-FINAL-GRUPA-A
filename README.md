@@ -102,165 +102,169 @@ Las funcionalidades centrales que se implementaron son:
 
 ## Codigo fuente
 
-        #Importar librerias
-        import pygame
-        import sys
-        import random
+```
 
-        #Inciamos pygame y el mixer
-        pygame.init()
-        pygame.mixer.init() 
+#Importar librerias
+import pygame
+import sys
+import random
 
-        #Crear las varibales que vamos a usar, la ventana, el titulo de la ventana
-        ANCHO = (900)
-        ALTO = (800)
+#Inciamos pygame y el mixer
+pygame.init()
+pygame.mixer.init() 
 
-        COLOR_JUGADOR = (118,238,198)
-        COLOR_ENEMIGO = (28,134,238)
-        COLOR_FOOD = (238,18,137)
+#Crear las varibales que vamos a usar, la ventana, el titulo de la ventana
+ANCHO = (900)
+ALTO = (800)
 
-        velocidad = 20
+COLOR_JUGADOR = (118,238,198)
+COLOR_ENEMIGO = (28,134,238)
+COLOR_FOOD = (238,18,137)
 
-        x_inicio = 420
-        y_inicio = 700
+velocidad = 20
 
-        puntaje = 0
+x_inicio = 420
+y_inicio = 700
 
-        vidas = 3
+puntaje = 0
 
-        ventana = pygame.display.set_mode((ANCHO,ALTO))
-        pygame.display.set_caption("Space Jam")
+vidas = 3
 
-        #Crear los objetos que apareceran en la pantalla
-        food_size = 30
-        food_pos = [random.randint(0,ANCHO - food_size),random.randint(0,ALTO - food_size)]
+ventana = pygame.display.set_mode((ANCHO,ALTO))
+pygame.display.set_caption("Space Jam")
 
-        jugador_size = 30
-        jugador_pos = [420,700]
+#Crear los objetos que apareceran en la pantalla
+food_size = 30
+food_pos = [random.randint(0,ANCHO - food_size),random.randint(0,ALTO - food_size)]
 
-        enemigo_size = 50
-        enemigo_pos = [random.randint(0,ANCHO - enemigo_size),0]
+jugador_size = 30
+jugador_pos = [420,700]
 
-        #Crear el bucle infinito y un reloj
-        game_over = False
-        clock = pygame.time.Clock()
+enemigo_size = 50
+enemigo_pos = [random.randint(0,ANCHO - enemigo_size),0]
 
-        #Cargar las imagenes y los sonidos
-        background_juego = pygame.image.load("background_juego2.png")
-        background_go = pygame.image.load("background_go2.png")
-        soundtrack = pygame.mixer.Sound("soundtrack.mp3")
-        soundtrack.play()  
-        food_sound = pygame.mixer.Sound("food.wav")
-        crash = pygame.mixer.Sound("crash.wav")
+#Crear el bucle infinito y un reloj
+game_over = False
+clock = pygame.time.Clock()
 
-        #Funciones de colision, restar vidas, y aumentar puntaje
-        def detectar_colision_enemigo(jugador_pos,enemigo_pos):
+#Cargar las imagenes y los sonidos
+background_juego = pygame.image.load("background_juego2.png")
+background_go = pygame.image.load("background_go2.png")
+soundtrack = pygame.mixer.Sound("soundtrack.mp3")
+soundtrack.play()  
+food_sound = pygame.mixer.Sound("food.wav")
+crash = pygame.mixer.Sound("crash.wav")
+
+#Funciones de colision, restar vidas, y aumentar puntaje
+def detectar_colision_enemigo(jugador_pos,enemigo_pos):
         jx = jugador_pos[0]
         jy = jugador_pos[1]
         ex = enemigo_pos[0]
         ey = enemigo_pos[1]
 
-    if (ex >= jx and ex <(jx + jugador_size)) or (jx >= ex and jx < (ex + enemigo_size)):
-        if (ey >= jy and ey <(jy + jugador_size)) or (jy >= ey and jy < (ey + enemigo_size)):
-            if detectar_colision_enemigo:
-                crash.play()
-                global vidas
-                vidas -=1
-            return True
-    return False
+        if (ex >= jx and ex <(jx + jugador_size)) or (jx >= ex and jx < (ex + enemigo_size)):
+                if (ey >= jy and ey <(jy + jugador_size)) or (jy >= ey and jy < (ey + enemigo_size)):
+                        if detectar_colision_enemigo:
+                        crash.play()
+                        global vidas
+                        vidas -=1
+                            return True
+        return False
 
-        def detectar_colision_food(jugador_pos,food_pos):
+def detectar_colision_food(jugador_pos,food_pos):
         jx = jugador_pos[0]
         jy = jugador_pos[1]
         fx = food_pos[0]
         fy = food_pos[1]
 
-    if (fx >= jx and fx <(jx + jugador_size)) or (jx >= fx and jx < (fx + food_size)):
-        if (fy >= jy and fy <(jy + jugador_size)) or (jy >= fy and jy < (fy + food_size)):
-            food_sound.play()
-            global puntaje
-            puntaje +=10
-            return True
-    return False
+        if (fx >= jx and fx <(jx + jugador_size)) or (jx >= fx and jx < (fx + food_size)):
+                if (fy >= jy and fy <(jy + jugador_size)) or (jy >= fy and jy < (fy + food_size)):
+                    food_sound.play()
+                    global puntaje
+                    puntaje +=10
+                    return True
+        return False
 
-        #Bucle de juego
-        while not game_over:
+#Bucle de juego
+while not game_over:
         for evento in pygame.event.get():
                 if evento.type == pygame.QUIT:
                 sys.exit()
         #Movimiento del jugador
         tecla_presionada = pygame.key.get_pressed() 
 
-    x = jugador_pos[0]
-    y = jugador_pos[1]
+        x = jugador_pos[0]
+        y = jugador_pos[1]
 
-    if tecla_presionada[pygame.K_a]:
+        if tecla_presionada[pygame.K_a]:
                 x -= velocidad
-    if tecla_presionada[pygame.K_d]:
+        if tecla_presionada[pygame.K_d]:
                 x += velocidad
-    if tecla_presionada[pygame.K_w]:
+        if tecla_presionada[pygame.K_w]:
                 y -= velocidad
-    if tecla_presionada[pygame.K_s]:
+        if tecla_presionada[pygame.K_s]:
                 y += velocidad
             
-    jugador_pos[0] = x
-    jugador_pos[1] = y
+        jugador_pos[0] = x
+        jugador_pos[1] = y
 
-    #Insertar fondo, texto de puntaje y de vidas en la pantalla
-    ventana.blit(background_juego, [0,0])
+        #Insertar fondo, texto de puntaje y de vidas en la pantalla
+        ventana.blit(background_juego, [0,0])
     
-    texto_puntos = pygame.font.SysFont("Impact", 30)
-    puntos = texto_puntos.render("Puntaje: " + str(puntaje), 1, (32,178,170))
-    ventana.blit(puntos,(50,50))
+        texto_puntos = pygame.font.SysFont("Impact", 30)
+        puntos = texto_puntos.render("Puntaje: " + str(puntaje), 1, (32,178,170))
+        ventana.blit(puntos,(50,50))
 
-    texto_vidas = pygame.font.SysFont("Impact", 30)
-    text_vidas = texto_vidas.render("Vidas: " + str(vidas), 1, (32,178,170))
-    ventana.blit(text_vidas,(ANCHO - 150,50))
+        texto_vidas = pygame.font.SysFont("Impact", 30)
+        text_vidas = texto_vidas.render("Vidas: " + str(vidas), 1, (32,178,170))
+        ventana.blit(text_vidas,(ANCHO - 150,50))
 
-    #Movimiento y posicion aleatoria de los enemigos
-    if enemigo_pos[1] >= 0 and enemigo_pos[1] < ALTO:
-        enemigo_pos[1] += 20
-    else:
-        enemigo_pos[0] = random.randint(0,ANCHO - enemigo_size)
-        enemigo_pos[1] = 0
+        #Movimiento y posicion aleatoria de los enemigos
+        if enemigo_pos[1] >= 0 and enemigo_pos[1] < ALTO:
+                enemigo_pos[1] += 20
+        else:
+                enemigo_pos[0] = random.randint(0,ANCHO - enemigo_size)
+                enemigo_pos[1] = 0
 
-    #Llamar funciones de colision
-    if detectar_colision_enemigo(jugador_pos,enemigo_pos):
-        jugador_pos[0] = x_inicio
-        jugador_pos[1] = y_inicio
-        detectar_colision_enemigo(jugador_pos,enemigo_pos)
+        #Llamar funciones de colision
+        if detectar_colision_enemigo(jugador_pos,enemigo_pos):
+                jugador_pos[0] = x_inicio
+                jugador_pos[1] = y_inicio
+                detectar_colision_enemigo(jugador_pos,enemigo_pos)
     
-    if detectar_colision_food(jugador_pos,food_pos):
-        food_pos[0] = random.randint(0,ANCHO - food_size)
-        food_pos[1] = random.randint(0,ALTO - food_size)
+        if detectar_colision_food(jugador_pos,food_pos):
+                food_pos[0] = random.randint(0,ANCHO - food_size)
+                food_pos[1] = random.randint(0,ALTO - food_size)
         
-    #Dibujar al enemigo, food, jugador; insertar puntos y vidas en la pantalla
-    pygame.draw.rect(ventana,COLOR_ENEMIGO,(enemigo_pos[0],enemigo_pos[1],enemigo_size,enemigo_size))
-    pygame.draw.rect(ventana,COLOR_FOOD,(food_pos[0],food_pos[1],food_size,food_size))
-    pygame.draw.rect(ventana,COLOR_JUGADOR,(jugador_pos[0],jugador_pos[1],jugador_size,jugador_size))
-    ventana.blit(puntos,(50,50))
-    text_vidas = texto_vidas.render("Vidas: " + str(vidas), 1, (32,178,170))
-    ventana.blit(text_vidas,(ANCHO - 150, 50))
+        #Dibujar al enemigo, food, jugador; insertar puntos y vidas en la pantalla
+        pygame.draw.rect(ventana,COLOR_ENEMIGO,(enemigo_pos[0],enemigo_pos[1],enemigo_size,enemigo_size))
+        pygame.draw.rect(ventana,COLOR_FOOD,(food_pos[0],food_pos[1],food_size,food_size))
+        pygame.draw.rect(ventana,COLOR_JUGADOR,(jugador_pos[0],jugador_pos[1],jugador_size,jugador_size))
+        ventana.blit(puntos,(50,50))
+        text_vidas = texto_vidas.render("Vidas: " + str(vidas), 1, (32,178,170))
+        ventana.blit(text_vidas,(ANCHO - 150, 50))
 
-    #Condicion para que la pantalla cambie cuando el jugador se quede sin vidas
-    if vidas == 0:
-        game_over = True
+        #Condicion para que la pantalla cambie cuando el jugador se quede sin vidas
+        if vidas == 0:
+                game_over = True
 
-    #Condicion para cambiar la imagen y poner pantalla de game over
-    if game_over:
-        ventana.blit(background_go, [0,0])
-        go_fuente = pygame.font.SysFont("Impact", 60)
-        go_texto = go_fuente.render("GAME OVER", True, (255,255,255))
-        ventana.blit(go_texto, (ANCHO//2 - go_texto.get_width()//2, ALTO//2 - go_texto.get_height()//2))
+        #Condicion para cambiar la imagen y poner pantalla de game over
+        if game_over:
+                ventana.blit(background_go, [0,0])
+                go_fuente = pygame.font.SysFont("Impact", 60)
+                go_texto = go_fuente.render("GAME OVER", True, (255,255,255))
+                ventana.blit(go_texto, (ANCHO//2 - go_texto.get_width()//2, ALTO//2 - go_texto.get_height()//2))
+                pygame.display.update()
+                game_over = False
+
+        #Usar el reloj para controlar la velocidad de los enemigos
+        clock.tick(30)
+
+        #Actualizar pantalla
         pygame.display.update()
-        game_over = False
+pygame.quit()
 
-    #Usar el reloj para controlar la velocidad de los enemigos
-    clock.tick(30)
-
-    #Actualizar pantalla
-    pygame.display.update()
-        pygame.quit()
+```
 
 ## Conclusion
 Este proyecto me permitió practicar conceptos importantes de programación como:
