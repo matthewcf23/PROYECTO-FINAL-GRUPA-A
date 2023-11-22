@@ -2,6 +2,8 @@
 ## Juego de nave "SPACEJAM"
 Universiad: Universida Privada Domingo Savio
 
+https://github.com/matthewcf23/PROYECTO-FINAL-GRUPA-A/assets/151700413/aa8556e4-759a-4e92-9130-9bc9eed059e7
+
 Facultad: Ingenieria
 
 Titulo del proyecto: Juegos de Naves "Space Jam"
